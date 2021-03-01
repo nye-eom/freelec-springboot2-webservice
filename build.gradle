@@ -1,0 +1,36 @@
+/* plug-in 의존성관리 */
+buildscript {
+    /* build.gradle 내 전역변수 설정 */
+    ext {
+        springBootVersion = '2.1.7.RELEASE'
+    }
+    /* 각 의존성(lib)들을 어떤 원격저장소에 받을지 지정 */
+    repositories {
+        mavenCentral()/* 본인이만든 라이브러리 사용을 위해 많은 과정과 설정 필요 */
+        jcenter()/* 라이브러리 업로드 간소화 -> jcenter 업로드시 mavenCentral에도 업로드 지동화 반영 */
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        //classpath('org.springframework.boot:spring-boot-autoconfigure:2.1.7.RELEASE')
+    }
+}
+
+/* java와 springboot 사용위한 필수 플러그인  */
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management' /* spring-boot 의존성 관리 플러그인 */
+
+group 'com.jojoidu.book'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+/* 프로젝트에 필요한 의존성 선언 */
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-web')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
